@@ -1,9 +1,7 @@
 import "dotenv/config"; // Load environment variables from .env file
-import {
-    Client,
-    GatewayIntentBits,
-    Events,
-} from "discord.js";
+import { GatewayIntentBits } from "discord.js";
+import Client from "./extensions/custom-client";
+import { loadEvents } from "./handlers/handleEvents";
 
 // Ensure the bot token is available
 const DISCORD_BOT_TOKEN: string | undefined = process.env.DISCORD_BOT_TOKEN;
@@ -22,8 +20,7 @@ const client: Client = new Client({
     intents: intents,
 });
 
-client.once(Events.ClientReady, (readyClient) => {
-    console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-});
+// Load events into the client
+loadEvents(client);
 
 client.login(DISCORD_BOT_TOKEN);
