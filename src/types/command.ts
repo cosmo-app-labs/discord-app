@@ -11,7 +11,7 @@ import Client from '../extensions/custom-client';
 /**
  * Represents the categories a command can belong to.
  */
-export type Category = 'Information' | 'Utility' | 'Images';
+export type Category = 'Fun' | 'Images' | 'Information' | 'Utility';
 
 /**
  * Interface for defining a command in the Discord bot.
