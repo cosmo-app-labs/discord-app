@@ -3,6 +3,7 @@ import { GatewayIntentBits } from "discord.js";
 import Client from "./extensions/custom-client";
 import { loadEvents } from "./handlers/handleEvents";
 import { loadCommands } from "./handlers/handleCommands";
+import { loadComponents } from "./handlers/handleComponents";
 
 // Ensure the bot token is available
 const DISCORD_BOT_TOKEN: string | undefined = process.env.DISCORD_BOT_TOKEN;
@@ -26,5 +27,6 @@ const client: Client = new Client({
 // Load events into the client
 loadEvents(client);
 loadCommands(client);
+loadComponents(client);
 
 client.login(DISCORD_BOT_TOKEN);

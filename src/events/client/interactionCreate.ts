@@ -26,6 +26,43 @@ const interactionCreateEvent: Event = {
                     ephemeral: true,
                 });
             }
+        } else if (interaction.isAutocomplete()) {
+            const { commands } = client;
+            const { commandName } = interaction;
+
+            const command: Command | undefined = commands.get(commandName);
+            if (!command || !command.autocomplete) return;
+
+            try {
+                await command.autocomplete(interaction, client);
+            } catch (error) {
+                console.error(error);
+            }
+        } else if (interaction.isStringSelectMenu()) {
+            const { selectMenus } = client;
+            const { customId } = interaction;
+
+            const selectMenu = selectMenus.get(customId);
+            if (!selectMenu) {
+                return await interaction.reply({
+                    content: `The select menu with the custom ID ${customId} does not exist!`
+                });
+            }
+
+            try {
+                await selectMenu.execute(interaction, client);
+            } catch (error) {
+                console.error(error);
+                if (interaction.deferred) {
+                    return await interaction.editReply({
+                        content: `There was an error while executing the select menu ${customId.toLowerCase()}!`
+                    });
+                } else {
+                    return await interaction.reply({
+                        content: `There was an error while executing the select menu ${customId.toLowerCase()}!`
+                    });
+                }
+            }
         }
     },
 };

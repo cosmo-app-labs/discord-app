@@ -1,4 +1,5 @@
 import {
+    AutocompleteInteraction,
     ChatInputCommandInteraction,
     InteractionResponse,
     Message,
@@ -35,4 +36,10 @@ export interface Command {
      * @param client - The client instance of the Discord bot.
      */
     execute(interaction: ChatInputCommandInteraction, client: Client): Promise<InteractionResponse<boolean> | Message<boolean> | undefined>;
+
+    /**
+    * Optional method to handle autocomplete interactions for the command.
+    * @param interaction - The autocomplete interaction object.
+    */
+    autocomplete?(interaction: AutocompleteInteraction, client: Client): Promise<void>;
 }
