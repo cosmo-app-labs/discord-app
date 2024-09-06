@@ -28,13 +28,13 @@ async function loadCommands(client: Client): Promise<void> {
             if (!command?.data?.name) {
                 console.warn(`WARNING: The command "${path.basename(file, path.extname(file))}" is missing required properties and will be skipped.`);
                 table.push([path.basename(file, path.extname(file)), "🟥"]);
-                return;
+                continue;
             }
 
             if (client.commands.has(command.data.name)) {
                 console.warn(`WARNING: A Duplicate command name "${command.data.name}" has been detected and will be skipped.`);
                 table.push([command.data.name, "🟥"]);
-                return;
+                continue;
             }
 
             client.commands.set(command.data.name, command);
