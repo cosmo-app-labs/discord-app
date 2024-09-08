@@ -38,6 +38,31 @@ const interactionCreateEvent: Event = {
             } catch (error) {
                 console.error(error);
             }
+        } else if (interaction.isButton()) {
+            const { buttons } = client;
+            const { customId } = interaction;
+
+            const button = buttons.get(customId);
+            if (!button) {
+                return await interaction.reply({
+                    content: `The button with the custom ID ${customId} does not exist!`
+                });
+            }
+
+            try {
+                await button.execute(interaction, client);
+            } catch (error) {
+                console.error(error);
+                if (interaction.deferred) {
+                    return await interaction.editReply({
+                        content: `There was an error while executing the button ${customId.toLowerCase()}!`
+                    });
+                } else {
+                    return await interaction.reply({
+                        content: `There was an error while executing the button ${customId.toLowerCase()}!`
+                    });
+                }
+            }
         } else if (interaction.isStringSelectMenu()) {
             const { selectMenus } = client;
             const { customId } = interaction;

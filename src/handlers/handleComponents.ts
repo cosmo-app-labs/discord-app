@@ -2,12 +2,13 @@ import path from "path";
 import { Collection } from "discord.js";
 import { loadFiles } from "../lib/fileLoader";
 import Client from "../extensions/custom-client";
+import { Button } from "../types/button";
 import { SelectMenu } from "../types/selectMenu";
 
-type ComponentType = SelectMenu;
+type ComponentType = Button | SelectMenu;
 
 async function loadComponents(client: Client) {
-    const componentsTypes = ["selectMenus"];
+    const componentsTypes = ["buttons", "selectMenus"];
     for (const componentsType of componentsTypes) {
         const files = await loadFiles(`src/components/${componentsType}`);
 
