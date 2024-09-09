@@ -1,9 +1,9 @@
-import "dotenv/config"; // Load environment variables from .env file
-import { GatewayIntentBits } from "discord.js";
-import Client from "./extensions/custom-client";
-import { loadEvents } from "./handlers/handleEvents";
-import { loadCommands } from "./handlers/handleCommands";
-import { loadComponents } from "./handlers/handleComponents";
+import 'dotenv/config'; // Load environment variables from .env file
+import { GatewayIntentBits } from 'discord.js';
+import Client from './extensions/custom-client';
+import { loadEvents } from './handlers/handleEvents';
+import { loadCommands } from './handlers/handleCommands';
+import { loadComponents } from './handlers/handleComponents';
 
 // Ensure the bot token is available
 const DISCORD_BOT_TOKEN: string | undefined = process.env.DISCORD_BOT_TOKEN;

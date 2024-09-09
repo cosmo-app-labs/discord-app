@@ -1,21 +1,18 @@
-import { ActionRowBuilder, SlashCommandBuilder, StringSelectMenuBuilder } from "discord.js";
-import { Command } from "../../types/command";
-import axios from "axios";
+import { ActionRowBuilder, SlashCommandBuilder, StringSelectMenuBuilder } from 'discord.js';
+import { Command } from '../../types/command';
+import axios from 'axios';
 
 const command: Command = {
     data: new SlashCommandBuilder()
-        .setName("manga")
-        .setDescription("Get information about a manga!")
+        .setName('manga')
+        .setDescription('Get information about a manga!')
         .addStringOption((option) =>
-            option
-                .setName("search")
-                .setDescription("Name of the manga to search")
-                .setRequired(true)
+            option.setName('search').setDescription('Name of the manga to search').setRequired(true)
         ),
-    category: "Information",
+    category: 'Information',
     async execute(interaction) {
         // Get the search query from the user
-        const searchQuery = interaction.options.getString("search", true);
+        const searchQuery = interaction.options.getString('search', true);
 
         // Defer the reply to fetch the message
         await interaction.deferReply();
@@ -32,7 +29,7 @@ const command: Command = {
         // If no manga is found, return an error message
         if (mangaList.length === 0) {
             return await interaction.editReply({
-                content: "❌ | No manga found with the provided search query.",
+                content: '❌ | No manga found with the provided search query.',
             });
         }
 
@@ -42,15 +39,19 @@ const command: Command = {
                 const rankA = a.attributes.popularityRank || Number.MAX_SAFE_INTEGER;
                 const rankB = b.attributes.popularityRank || Number.MAX_SAFE_INTEGER;
                 return rankA - rankB;
-            }).slice(0, 5);
+            })
+            .slice(0, 5);
 
         // Create a select menu with the top manga
         const selectMenu = new StringSelectMenuBuilder()
-            .setCustomId("select-manga")
-            .setPlaceholder("Select a manga")
+            .setCustomId('select-manga')
+            .setPlaceholder('Select a manga')
             .addOptions(
                 topManga
-                    .filter((manga: any) => manga.attributes.canonicalTitle || manga.attributes.titles.en_jp)
+                    .filter(
+                        (manga: any) =>
+                            manga.attributes.canonicalTitle || manga.attributes.titles.en_jp
+                    )
                     .map((manga: any) => ({
                         label: manga.attributes.canonicalTitle,
                         description: manga.attributes.titles.en_jp,
@@ -63,10 +64,10 @@ const command: Command = {
 
         // Send a message to the user to select a manga
         return await interaction.editReply({
-            content: "Select a manga from the list below:",
+            content: 'Select a manga from the list below:',
             components: [actionRow],
         });
-    }
+    },
 };
 
 export default command;

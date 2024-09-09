@@ -1,12 +1,12 @@
-import { ClientEvents } from "discord.js";
+import { ClientEvents } from 'discord.js';
 
 /**
  * Represents a Discord event handler.
  */
 export interface Event {
     /**
-    * The name of the event. This should match a valid event name from Discord.js.
-    */
+     * The name of the event. This should match a valid event name from Discord.js.
+     */
     name: keyof ClientEvents;
 
     /**
@@ -16,8 +16,8 @@ export interface Event {
     execute: (...args: any[]) => Promise<any> | void;
 
     /**
-    * Indicates if the event is related to Discord's REST API.
-    */
+     * Indicates if the event is related to Discord's REST API.
+     */
     rest?: boolean;
 
     /**

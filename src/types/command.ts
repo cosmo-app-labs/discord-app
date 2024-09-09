@@ -16,7 +16,7 @@ export type Category = 'Fun' | 'Images' | 'Information' | 'Utility';
 
 /**
  * Interface for defining a command in the Discord bot.
-*/
+ */
 export interface Command {
     /**
      * The builder object that defines the command's structure.
@@ -30,16 +30,19 @@ export interface Command {
     category: Category;
 
     /**
-     * The function to be executed when the command is invoked. 
+     * The function to be executed when the command is invoked.
      * It handles the command's logic and interacts with the Discord API.
      * @param interaction - The interaction object representing the command interaction.
      * @param client - The client instance of the Discord bot.
      */
-    execute(interaction: ChatInputCommandInteraction, client: Client): Promise<InteractionResponse<boolean> | Message<boolean> | undefined | void>;
+    execute(
+        interaction: ChatInputCommandInteraction,
+        client: Client
+    ): Promise<InteractionResponse<boolean> | Message<boolean> | undefined | void>;
 
     /**
-    * Optional method to handle autocomplete interactions for the command.
-    * @param interaction - The autocomplete interaction object.
-    */
+     * Optional method to handle autocomplete interactions for the command.
+     * @param interaction - The autocomplete interaction object.
+     */
     autocomplete?(interaction: AutocompleteInteraction, client: Client): Promise<void>;
 }

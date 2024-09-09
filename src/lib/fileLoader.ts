@@ -45,7 +45,7 @@ async function loadFiles(dirName: string): Promise<FileList> {
     const files: FileList = await getFiles(patternDir);
 
     // Clear the module cache for each file
-    files.forEach(file => {
+    files.forEach((file) => {
         delete require.cache[require.resolve(file)];
     });
 

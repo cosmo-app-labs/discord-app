@@ -1,21 +1,18 @@
-import { SlashCommandBuilder } from "discord.js";
-import { Command } from "../../types/command";
-import roastMessages from "../../lib/json/roast.json";
+import { SlashCommandBuilder } from 'discord.js';
+import { Command } from '../../types/command';
+import roastMessages from '../../lib/json/roast.json';
 
 const command: Command = {
     data: new SlashCommandBuilder()
-        .setName("roast")
-        .setDescription("😅 Roast someone with a witty message!")
+        .setName('roast')
+        .setDescription('😅 Roast someone with a witty message!')
         .addUserOption((option) =>
-            option
-                .setName("target")
-                .setDescription("The user you want to roast")
-                .setRequired(false)
+            option.setName('target').setDescription('The user you want to roast').setRequired(false)
         ),
-    category: "Fun",
+    category: 'Fun',
     async execute(interaction) {
         // Get the target user
-        const user = interaction.options.getUser("target") || interaction.user;
+        const user = interaction.options.getUser('target') || interaction.user;
 
         // Defer the reply to fetch the message
         await interaction.deferReply();

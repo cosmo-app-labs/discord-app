@@ -4,7 +4,7 @@ import Client from '../extensions/custom-client';
 /**
  * Interface representing a button component in a Discord app.
  * Defines the structure and behavior of button interactions within the app.
-*/
+ */
 export interface Button {
     /**
      * The builder object that defines the structure and behavior of the button.
@@ -22,5 +22,8 @@ export interface Button {
      * @param client - The client instance of the Discord bot.
      * @returns A promise that resolves with the interaction response when the execution is complete.
      */
-    execute(interaction: ButtonInteraction<CacheType>, client: Client): Promise<InteractionResponse<boolean> | void>;
+    execute(
+        interaction: ButtonInteraction<CacheType>,
+        client: Client
+    ): Promise<InteractionResponse<boolean> | void>;
 }

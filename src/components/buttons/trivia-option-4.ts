@@ -1,8 +1,8 @@
-import { Button } from "../../types/button";
+import { Button } from '../../types/button';
 
 const button: Button = {
     data: {
-        name: "trivia-option-4",
+        name: 'trivia-option-4',
     },
     async execute(interaction) {
         return;

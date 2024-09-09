@@ -1,12 +1,10 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { Command } from "../../types/command";
-import axios from "axios";
+import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
+import { Command } from '../../types/command';
+import axios from 'axios';
 
 const command: Command = {
-    data: new SlashCommandBuilder()
-        .setName("meme")
-        .setDescription("Get a meme!"),
-    category: "Images",
+    data: new SlashCommandBuilder().setName('meme').setDescription('Get a meme!'),
+    category: 'Images',
     async execute(interaction) {
         // Defer the reply to fetch the message
         await interaction.deferReply();
@@ -67,7 +65,7 @@ const command: Command = {
             .setTitle(`${title}`)
             .setImage(imageUrl)
             .setURL(redditUrl)
-            .setColor("Blue");
+            .setColor('Blue');
 
         // Edit the reply with the embed
         return await interaction.editReply({

@@ -1,13 +1,13 @@
-import { bold, inlineCode, PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
-import ms from "ms";
-import { Command } from "../../types/command";
+import { bold, inlineCode, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
+import ms from 'ms';
+import { Command } from '../../types/command';
 
 const command: Command = {
     data: new SlashCommandBuilder()
-        .setName("ping")
-        .setDescription("Pong! 🏓")
+        .setName('ping')
+        .setDescription('Pong! 🏓')
         .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages),
-    category: "Utility",
+    category: 'Utility',
     async execute(interaction) {
         // Defer the reply to fetch the message
         const initialReply = await interaction.deferReply({

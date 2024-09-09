@@ -22,5 +22,8 @@ export interface SelectMenu {
      * @param client - The client instance of the Discord bot.
      * @returns A promise that resolves with the interaction response when the execution is complete.
      */
-    execute(interaction: StringSelectMenuInteraction<CacheType>, client: Client): Promise<InteractionResponse<boolean> | void>;
+    execute(
+        interaction: StringSelectMenuInteraction<CacheType>,
+        client: Client
+    ): Promise<InteractionResponse<boolean> | void>;
 }

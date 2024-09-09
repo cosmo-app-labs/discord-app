@@ -1,7 +1,4 @@
-import {
-    Events,
-    Interaction,
-} from 'discord.js';
+import { Events, Interaction } from 'discord.js';
 import Client from '../../extensions/custom-client';
 import { Command } from '../../types/command';
 import { Event } from '../../types/event';
@@ -45,7 +42,7 @@ const interactionCreateEvent: Event = {
             const button = buttons.get(customId);
             if (!button) {
                 return await interaction.reply({
-                    content: `The button with the custom ID ${customId} does not exist!`
+                    content: `The button with the custom ID ${customId} does not exist!`,
                 });
             }
 
@@ -55,11 +52,11 @@ const interactionCreateEvent: Event = {
                 console.error(error);
                 if (interaction.deferred) {
                     return await interaction.editReply({
-                        content: `There was an error while executing the button ${customId.toLowerCase()}!`
+                        content: `There was an error while executing the button ${customId.toLowerCase()}!`,
                     });
                 } else {
                     return await interaction.reply({
-                        content: `There was an error while executing the button ${customId.toLowerCase()}!`
+                        content: `There was an error while executing the button ${customId.toLowerCase()}!`,
                     });
                 }
             }
@@ -70,7 +67,7 @@ const interactionCreateEvent: Event = {
             const selectMenu = selectMenus.get(customId);
             if (!selectMenu) {
                 return await interaction.reply({
-                    content: `The select menu with the custom ID ${customId} does not exist!`
+                    content: `The select menu with the custom ID ${customId} does not exist!`,
                 });
             }
 
@@ -80,11 +77,11 @@ const interactionCreateEvent: Event = {
                 console.error(error);
                 if (interaction.deferred) {
                     return await interaction.editReply({
-                        content: `There was an error while executing the select menu ${customId.toLowerCase()}!`
+                        content: `There was an error while executing the select menu ${customId.toLowerCase()}!`,
                     });
                 } else {
                     return await interaction.reply({
-                        content: `There was an error while executing the select menu ${customId.toLowerCase()}!`
+                        content: `There was an error while executing the select menu ${customId.toLowerCase()}!`,
                     });
                 }
             }

@@ -1,21 +1,18 @@
-import { SlashCommandBuilder } from "discord.js";
-import { Command } from "../../types/command";
-import killMessages from "../../lib/json/kill.json";
+import { SlashCommandBuilder } from 'discord.js';
+import { Command } from '../../types/command';
+import killMessages from '../../lib/json/kill.json';
 
 const command: Command = {
     data: new SlashCommandBuilder()
-        .setName("kill")
-        .setDescription("🗡 Make a dramatic killing statement!")
+        .setName('kill')
+        .setDescription('🗡 Make a dramatic killing statement!')
         .addUserOption((option) =>
-            option
-                .setName("target")
-                .setDescription("The user you want to kill")
-                .setRequired(true)
+            option.setName('target').setDescription('The user you want to kill').setRequired(true)
         ),
-    category: "Fun",
+    category: 'Fun',
     async execute(interaction) {
         // Get the target user
-        const target = interaction.options.getUser("target", true);
+        const target = interaction.options.getUser('target', true);
 
         // Defer the reply to fetch the message
         await interaction.deferReply();
