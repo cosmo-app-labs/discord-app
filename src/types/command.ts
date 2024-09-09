@@ -35,7 +35,7 @@ export interface Command {
      * @param interaction - The interaction object representing the command interaction.
      * @param client - The client instance of the Discord bot.
      */
-    execute(interaction: ChatInputCommandInteraction, client: Client): Promise<InteractionResponse<boolean> | Message<boolean> | undefined>;
+    execute(interaction: ChatInputCommandInteraction, client: Client): Promise<InteractionResponse<boolean> | Message<boolean> | undefined | void>;
 
     /**
     * Optional method to handle autocomplete interactions for the command.
