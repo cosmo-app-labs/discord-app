@@ -10,6 +10,10 @@ import { Event } from '../types/event';
  * @returns A promise that resolves when all events have been loaded and registered.
  */
 async function loadEvents(client: Client): Promise<void> {
+    // Check if the environment is production
+    const NODE_ENV: string | undefined = process.env.NODE_ENV;
+    const isProd = NODE_ENV === 'production';
+
     // Initialize a CLI table to display loaded events
     const table = new Table({
         head: ['Events', 'Status'],
@@ -20,8 +24,9 @@ async function loadEvents(client: Client): Promise<void> {
     // Clear any previously registered events
     client.events.clear();
 
-    // Load event files from the specified directory
-    const files = await loadFiles('src/events');
+     // Load event files from the specified directory
+     const directoryPath = isProd ? 'dist/events' : 'src/events';
+     const files = await loadFiles(directoryPath);
 
     const results = await Promise.allSettled(
         files.map(async (file: string) => {

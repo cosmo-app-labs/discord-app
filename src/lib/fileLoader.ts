@@ -10,15 +10,21 @@ type FileList = string[];
  * @returns A promise that resolves to a list of .ts file paths.
  */
 async function getFiles(dir: string): Promise<FileList> {
+    // Check if the environment is production
+    const NODE_ENV: string | undefined = process.env.NODE_ENV;
+    const isProd = NODE_ENV === 'production';
+
     let files: FileList = [];
     try {
         const items = await fs.readdir(dir, { withFileTypes: true });
 
         const filePromises = items.map(async (item) => {
             const fullPath = path.join(dir, item.name);
+            const extension = isProd ? '.js' : '.ts';
+            
             if (item.isDirectory()) {
                 return getFiles(fullPath);
-            } else if (item.isFile() && item.name.endsWith('.ts')) {
+            } else if (item.isFile() && item.name.endsWith(extension)) {
                 return [fullPath];
             }
             return [];

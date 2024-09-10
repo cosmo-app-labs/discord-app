@@ -8,9 +8,14 @@ import { SelectMenu } from '../types/selectMenu';
 type ComponentType = Button | SelectMenu;
 
 async function loadComponents(client: Client) {
+    // Check if the environment is production
+    const NODE_ENV: string | undefined = process.env.NODE_ENV;
+    const isProd = NODE_ENV === 'production';
+
     const componentsTypes = ['buttons', 'selectMenus'];
     for (const componentsType of componentsTypes) {
-        const files = await loadFiles(`src/components/${componentsType}`);
+         const directoryPath = `${isProd ? 'dist' : 'src'}/components/${componentsType}`;
+        const files = await loadFiles(directoryPath);
 
         for (const file of files) {
             const componentModule = await import(file);

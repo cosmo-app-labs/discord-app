@@ -6,6 +6,10 @@ import { loadFiles } from '../lib/fileLoader';
 import { Command } from '../types/command';
 
 async function loadCommands(client: Client): Promise<void> {
+    // Check if the environment is production
+    const NODE_ENV: string | undefined = process.env.NODE_ENV;
+    const isProd = NODE_ENV === 'production';
+
     // Create a new table instance
     const table = new Table({
         head: ['Command', 'Status'],
@@ -18,7 +22,8 @@ async function loadCommands(client: Client): Promise<void> {
 
     // Load command files
     const commands: RESTPostAPIApplicationCommandsJSONBody[] = [];
-    const files = await loadFiles('src/commands');
+    const directoryPath = isProd ? 'dist/commands' : 'src/commands';
+    const files = await loadFiles(directoryPath);
 
     for (const file of files) {
         try {
