@@ -12,7 +12,7 @@ import Client from '../extensions/custom-client';
 /**
  * Represents the categories a command can belong to.
  */
-export type Category = 'Fun' | 'Images' | 'Information' | 'Utility';
+export type Category = 'Developer' | 'Fun' | 'Images' | 'Information' | 'Utility';
 
 /**
  * Interface for defining a command in the Discord bot.
@@ -29,6 +29,11 @@ export interface Command {
      */
     category: Category;
 
+    /**
+     * Whether the command is a developer-only command.
+     * Developer commands are only accessible by the bot owner.
+     */
+    developerOnly?: boolean;
     /**
      * The function to be executed when the command is invoked.
      * It handles the command's logic and interacts with the Discord API.

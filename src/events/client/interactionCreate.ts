@@ -15,6 +15,16 @@ const interactionCreateEvent: Event = {
             if (!command) return;
 
             try {
+                const DEVELOPER_IDS = process.env.DEVELOPER_IDS?.split(',');
+
+                // Check if the command is developer-only and the user is not authorized
+                if (command.developerOnly && !DEVELOPER_IDS?.includes(interaction.user.id)) {
+                    return await interaction.reply({
+                        content: 'You are not authorized to use this command.',
+                        ephemeral: true,
+                    });
+                }
+
                 await command.execute(interaction, client);
             } catch (error) {
                 console.error(error);
