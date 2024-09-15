@@ -4,6 +4,7 @@ import Client from './extensions/custom-client';
 import { loadEvents } from './handlers/handleEvents';
 import { loadCommands } from './handlers/handleCommands';
 import { loadComponents } from './handlers/handleComponents';
+import setupTopggIntegration from './handlers/handleStats';
 
 // Ensure the bot token is available
 const DISCORD_BOT_TOKEN: string | undefined = process.env.DISCORD_BOT_TOKEN;
@@ -28,5 +29,8 @@ const client: Client = new Client({
 loadEvents(client);
 loadCommands(client);
 loadComponents(client);
+
+// Setup Top.gg integration for posting bot stats
+setupTopggIntegration(client);
 
 client.login(DISCORD_BOT_TOKEN);

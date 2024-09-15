@@ -47,7 +47,9 @@ jobs:
                   build-args: |
                       DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}
                       CLIENT_ID=${{ secrets.CLIENT_ID }}
+                      DBL_TOKEN=${{ secrets.DBL_TOKEN }}
                       DEVELOPER_IDS=${{ secrets.DEVELOPER_IDS }}
+                      TOP_GG_TOKEN=${{ secrets.TOP_GG_TOKEN }}
                       NODE_ENV=production
 
             - name: Pull image
@@ -66,6 +68,8 @@ jobs:
                       sudo docker run -d --name discord-app -p 3005:3000 \
                             -e DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }} \
                             -e CLIENT_ID=${{ secrets.CLIENT_ID }} \
+                            -e DBL_TOKEN=${{ secrets.DBL_TOKEN }} \
                             -e DEVELOPER_IDS=${{ secrets.DEVELOPER_IDS }} \
+                            -e TOP_GG_TOKEN=${{ secrets.TOP_GG_TOKEN }} \
                             -e NODE_ENV=production \
                             ${{ secrets.DOCKERHUB_USERNAME }}/cosmo-discord-bot:latest
